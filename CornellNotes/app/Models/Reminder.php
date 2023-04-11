@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Reminder extends Model
 {
     use HasFactory;
+
+    public function users() {
+        return $this->belongsTo(user::class,'id_user');
+    }
+
+    public function subjects() {
+        return $this->belongsTo(subject::class,'id_subject');
+    }
 }
