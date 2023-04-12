@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -38,8 +39,11 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'lastName' => $request->lastName,
+            'controlNumber' =>  $request->controlNumber,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'id_career' => $request->career,
         ]);
 
         event(new Registered($user));

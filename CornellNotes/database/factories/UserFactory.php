@@ -29,12 +29,10 @@ class UserFactory extends Factory
             'lastName' => fake()->lastName(),
             'controlNumber' =>  $control,
             'email' =>strtolower($name).'.'.$control."@itsmotul.edu.mx",
-            'password' => $fLetters.$control,
-
+            //'password' => $fLetters.$control,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'id_career' => $career->id,
-
-
-            
+            'remember_token' => Str::random(10)
         ];
     }
 
