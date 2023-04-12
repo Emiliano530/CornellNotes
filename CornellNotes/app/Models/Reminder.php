@@ -16,4 +16,6 @@ class Reminder extends Model
     public function subjects() {
         return $this->belongsTo(subject::class,'id_subject');
     }
+
+    public $timestamps = false;
 }

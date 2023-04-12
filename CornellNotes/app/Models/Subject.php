@@ -20,4 +20,6 @@ class Subject extends Model
     public function reminders() {
         return $this->hasMany(reminder::class,'id_subject');
     }
+
+    public $timestamps = false;
 }

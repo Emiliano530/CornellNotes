@@ -16,4 +16,6 @@ class Career extends Model
     public function subjects() {
         return $this->hasMany(subject::class,'id_career');
     }
+
+    public $timestamps = false;
 }
