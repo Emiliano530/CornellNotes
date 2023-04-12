@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('lastName');
-            $table->string('controlNumber');
+            $table->string('lastName')->nullable();
+            $table->string('controlNumber')->nullable();
             $table->string('email');
             $table->string('password');
 
@@ -25,9 +25,10 @@ return new class extends Migration
             $table->foreignId('id_career')
                 ->constrained('careers')
                 ->cascadeOnUpdate();
+            $table->rememberToken();
             });
-        }
-        
+    }
+
     /**
      * Reverse the migrations.
      *

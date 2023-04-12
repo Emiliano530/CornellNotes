@@ -23,7 +23,7 @@ class ReminderFactory extends Factory
         $subject = Subject::inRandomOrder()->first();
         return [
             'title' => fake()->word(),
-            'content' => fake()->paragraph(),
+            'content' => fake()->sentence(),
             'value' => fake()->randomElement(['1','2','3','4']),
             'creation_date' => fake()->date(),
             'event_date' => fake()->date(),
