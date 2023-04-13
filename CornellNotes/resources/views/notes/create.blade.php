@@ -15,7 +15,9 @@
         <input type="text" name="keyWords" id="keyWords" class="form-control"></br>
         <label>Resumen</label></br>
         <input type="text" name="summary" id="summary" class="form-control"></br>
-
+        <label>Tema</label></br>
+        <input type="text" name="topic" id="topic" class="form-control"></br>
+        <label>Asignatura</label></br>
 <select id="subject" class="block mt-1 w-full h-2/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" type="text" name="subject" :value="old('subject')" required autofocus autocomplete="subject">
     @foreach($subjects as $subjectId => $subjectName)
         <option value="{{ $subjectId }}">{{ $subjectName }}</option>
