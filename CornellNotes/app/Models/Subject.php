@@ -13,13 +13,11 @@ class Subject extends Model
         return $this->belongsTo(Career::class,'id_career');
     }
 
-    public function notes() {
-        return $this->hasMany(note::class,'id_subject');
+    public function topics() {
+        return $this->hasMany(topic::class,'id_topic');
     }
     
-    public function reminders() {
-        return $this->hasMany(reminder::class,'id_subject');
-    }
-
     public $timestamps = false;
+
+    protected $fillable = ['subject', 'id_career'];
 }

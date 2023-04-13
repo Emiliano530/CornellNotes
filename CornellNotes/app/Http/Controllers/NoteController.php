@@ -3,27 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Note;
 use App\Models\Subject;
+use App\Models\Topic;
 
 class NoteController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        $notes = auth()->user()->notes->load('subjects');
+        $user_id = auth()->id();
+        $notes = Note::where('id_user', $user_id)->get();
         return view('notes.index', compact('notes'));
     }
 
     public function create()
     {
-        $user = auth()->user();
-        $subjects = Subject::where('id_career', $user->id_career)->get();
+        $user_id = auth()->id();
+        $subjects = Subject::where('id_career', auth()->user()->id_career)->pluck('subject', 'id');
         return view('notes.create', compact('subjects'));
     }
 
@@ -34,59 +30,64 @@ class NoteController extends Controller
         $note->content = $request->content;
         $note->keyWords = $request->keyWords;
         $note->summary = $request->summary;
-        $note->creation_date = now();
-        $note->id_user = auth()->user()->id;
-        $note->id_subject = $request->subject;
+        $note->creation_date = date('Y-m-d');
+        $note->id_user = auth()->id();
+        $note->id_topic = $request->id_topic;
         $note->save();
 
-        return redirect()->route('notes.index')->with('success', 'Note created successfully');
+        return redirect()->route('notes.index')->with('success', 'Note created successfully!');
     }
 
-    public function show(Note $note)
+    public function show($id)
     {
-        if ($note->id_user !== auth()->user()->id) {
-            return redirect()->route('notes.index')->with('error', 'You are not authorized to access this note');
+        $note = Note::find($id);
+
+        if ($note->id_user != auth()->id()) {
+            return redirect()->route('notes.index')->with('error', 'You do not have permission to view this note.');
         }
 
-        $note->load('subjects');
         return view('notes.show', compact('note'));
     }
 
-    public function edit(Note $note)
+    public function edit($id)
     {
-        if ($note->id_user !== auth()->user()->id) {
-            return redirect()->route('notes.index')->with('error', 'You are not authorized to edit this note');
+        $note = Note::find($id);
+
+        if ($note->id_user != auth()->id()) {
+            return redirect()->route('notes.index')->with('error', 'You do not have permission to edit this note.');
         }
 
-        $user = auth()->user();
-        $subjects = Subject::where('id_career', $user->id_career)->get();
-        return view('notes.edit', compact('note', 'subjects'));
+        return view('notes.edit', compact('note'));
     }
 
-    public function update(Request $request, Note $note)
+    public function update(Request $request, $id)
     {
-        if ($note->id_user !== auth()->user()->id) {
-            return redirect()->route('notes.index')->with('error', 'You are not authorized to update this note');
+        $note = Note::find($id);
+
+        if ($note->id_user != auth()->id()) {
+            return redirect()->route('notes.index')->with('error', 'You do not have permission to edit this note.');
         }
 
         $note->title = $request->title;
         $note->content = $request->content;
         $note->keyWords = $request->keyWords;
         $note->summary = $request->summary;
-        $note->id_subject = $request->id_subject;
+        $note->id_topic = $request->id_topic;
         $note->save();
 
-        return redirect()->route('notes.index')->with('success', 'Note updated successfully');
+        return redirect()->route('notes.index')->with('success', 'Note updated successfully!');
     }
 
-    public function destroy(Note $note)
+    public function destroy($id)
     {
-        if ($note->id_user !== auth()->user()->id) {
-            return redirect()->route('notes.index')->with('error', 'You are not authorized to delete this note');
+        $note = Note::find($id);
+
+        if ($note->id_user != auth()->id()) {
+            return redirect()->route('notes.index')->with('error', 'You do not have permission to delete this note.');
         }
 
         $note->delete();
 
-        return redirect()->route('notes.index')->with('success', 'Note deleted successfully');
+        return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
     }
 }

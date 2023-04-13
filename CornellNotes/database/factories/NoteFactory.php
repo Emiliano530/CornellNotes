@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use App\Models\Subject;
+use App\Models\Topic;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Note>
@@ -19,7 +19,7 @@ class NoteFactory extends Factory
     public function definition()
     {
         $user = User::inRandomOrder()->first();
-        $subject = Subject::inRandomOrder()->first();
+        $topic = Topic::inRandomOrder()->first();
         return [
             'title' => fake()->word(),
             'content' => fake()->paragraph(),
@@ -28,7 +28,7 @@ class NoteFactory extends Factory
             'creation_date' => fake()->date(),
 
             'id_user' => $user->id,
-            'id_subject' => $subject->id,
+            'id_topic' => $topic->id,
         ];
     }
 }

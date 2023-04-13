@@ -13,17 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('content');
-            $table->string('keyWords');
-            $table->string('summary');
-            $table->date('creation_date');
-
-            $table->foreignId('id_user')
-                ->constrained('users')
-                ->cascadeOnUpdate();
+            $table->string('topic');
+            
             $table->foreignId('id_subject')
                 ->constrained('subjects')
                 ->cascadeOnUpdate();
@@ -37,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notes');
+        Schema::dropIfExists('topics');
     }
 };

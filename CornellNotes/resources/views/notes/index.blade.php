@@ -23,6 +23,7 @@
                                         <th>Contenido</th>
                                         <th>Palabras clave</th>
                                         <th>Resumen</th>
+                                        <th>Tema</th>
                                         <th>Asignatura</th>
                                         <th>Actions</th>
                                     </tr>
@@ -35,7 +36,8 @@
                                         <td>{{ $item->content }}</td>
                                         <td>{{ $item->keyWords }}</td>
                                         <td>{{ $item->summary }}</td>
-                                        <td>{{ $item->subjects->subject}}</td>
+                                        <td>{{ $item->topics->topic }}</td>
+                                        <td>{{ $item->topics->subjects->subject}}</td>
  
                                         <td>
                                             <a href="{{ url('/note/' . $item->id) }}" title="View Note"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>

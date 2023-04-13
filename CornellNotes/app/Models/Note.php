@@ -13,9 +13,11 @@ class Note extends Model
         return $this->belongsTo(user::class,'id_user');
     }
 
-    public function subjects() {
-        return $this->belongsTo(subject::class,'id_subject');
+    public function topics() {
+        return $this->belongsTo(topic::class,'id_topic');
     }
 
     public $timestamps = false;
+
+    protected $fillable = ['title', 'content', 'keyWords', 'summary', 'creation_date', 'id_user', 'id_topic'];
 }

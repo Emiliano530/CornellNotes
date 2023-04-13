@@ -12,8 +12,9 @@
         <p class="card-text">Contenido : {{ $note->content }}</p>
         <p class="card-text">Palabras clave : {{ $note->keyWords }}</p>
         <p class="card-text">Resumen : {{ $note->summary }}</p>
-        <p class="card-text">Asignatura : {{ $note->subjects->subject }}</p>
-
+        <p class="card-text">Tema: {{ $note->topics->topic }}</p>
+        <p class="card-text">Asignatura : {{ $note->topics->subjects->subject }}</p>
+        
   </div>
        
     </hr>

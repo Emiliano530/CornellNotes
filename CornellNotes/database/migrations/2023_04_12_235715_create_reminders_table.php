@@ -24,8 +24,8 @@ return new class extends Migration
             $table->foreignId('id_user')
                 ->constrained('users')
                 ->cascadeOnUpdate();
-            $table->foreignId('id_subject')
-                ->constrained('subjects')
+            $table->foreignId('id_topic')
+                ->constrained('topics')
                 ->cascadeOnUpdate();
         });
     }
