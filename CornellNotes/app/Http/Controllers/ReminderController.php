@@ -66,7 +66,7 @@ class ReminderController extends Controller
         $reminder->content = $request->content;
         $reminder->value = $request->value;
         $reminder->creation_date = date('Y-m-d');
-        $reminder->event_date = date('Y-m-d');
+        $reminder->event_date = $request->event_date;
         $reminder->id_user = $user_id;
         $reminder->id_topic = $topic->id;
         $reminder->save();
