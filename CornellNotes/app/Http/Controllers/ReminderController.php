@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Note;
+use App\Models\Reminder;
 use App\Models\Subject;
 use App\Models\Topic;
 
-class NoteController extends Controller
+class ReminderController extends Controller
 {
     public function index(Request $request)
     {
@@ -15,7 +15,7 @@ class NoteController extends Controller
         $search = $request->get('search');
 
         if ($search) {
-            $notes = Note::where('id_user', $user_id)
+            $reminders = Reminder::where('id_user', $user_id)
                         ->where(function($queryBuilder) use ($search) {
                             $queryBuilder->where('title', 'like', '%'.$search.'%')
                                         ->orWhere('content', 'like', '%'.$search.'%')
@@ -29,17 +29,17 @@ class NoteController extends Controller
                         ->get();
         } else {
             $search = null;
-            $notes = Note::where('id_user', $user_id)->get();
+            $reminders = Reminder::where('id_user', $user_id)->get();
         }
 
-        return view('notes.index', compact('notes', 'search'));
+        return view('reminders.index', compact('reminders', 'search'));
     }
 
     public function create()
     {
         $user_id = auth()->id();
         $subjects = Subject::where('id_career', auth()->user()->id_career)->pluck('subject', 'id');
-        return view('notes.create', compact('subjects'));
+        return view('reminders.create', compact('subjects'));
     }
 
     public function store(Request $request)
@@ -61,50 +61,50 @@ class NoteController extends Controller
         }
     
         // Crear la nota y relacionarla con el tema y el usuario actual
-        $note = new Note;
-        $note->title = $request->title;
-        $note->content = $request->content;
-        $note->keyWords = $request->keyWords;
-        $note->summary = $request->summary;
-        $note->creation_date = date('Y-m-d');
-        $note->id_user = $user_id;
-        $note->id_topic = $topic->id;
-        $note->save();
+        $reminder = new Reminder;
+        $reminder->title = $request->title;
+        $reminder->content = $request->content;
+        $reminder->value = $request->value;
+        $reminder->creation_date = date('Y-m-d');
+        $reminder->event_date = date('Y-m-d');
+        $reminder->id_user = $user_id;
+        $reminder->id_topic = $topic->id;
+        $reminder->save();
     
-        return redirect()->route('notes.index')->with('success', 'Note created successfully!');
+        return redirect()->route('reminders.index')->with('success', 'reminder created successfully!');
 
     }
 
     public function show($id)
     {
-        $note = Note::find($id);
+        $reminder = Reminder::find($id);
 
-        if ($note->id_user != auth()->id()) {
-            return redirect()->route('notes.index')->with('error', 'You do not have permission to view this note.');
+        if ($reminder->id_user != auth()->id()) {
+            return redirect()->route('reminders.index')->with('error', 'You do not have permission to view this reminder.');
         }
 
-        return view('notes.show', compact('note'));
+        return view('reminders.show', compact('reminder'));
     }
 
     public function edit($id)
     {
-        $note = Note::find($id);
+        $reminder = Reminder::find($id);
 
-        if ($note->id_user != auth()->id()) {
-            return redirect()->route('notes.index')->with('error', 'You do not have permission to edit this note.');
+        if ($reminder->id_user != auth()->id()) {
+            return redirect()->route('reminders.index')->with('error', 'You do not have permission to edit this reminder.');
         }
 
         $user_id = auth()->id();
         $subjects = Subject::where('id_career', auth()->user()->id_career)->pluck('subject', 'id');
-        return view('notes.edit', compact('note','subjects'));
+        return view('reminders.edit', compact('reminder','subjects'));
     }
 
     public function update(Request $request, $id)
     {
-        $note = Note::find($id);
+        $reminder = Reminder::find($id);
 
-        if ($note->id_user != auth()->id()) {
-            return redirect()->route('notes.index')->with('error', 'You do not have permission to edit this note.');
+        if ($reminder->id_user != auth()->id()) {
+            return redirect()->route('reminders.index')->with('error', 'You do not have permission to edit this reminder.');
         }
 
         $user_id = auth()->id();
@@ -124,25 +124,25 @@ class NoteController extends Controller
         }
     
         // Crear la nota y relacionarla con el tema y el usuario actual
-        $note->title = $request->title;
-        $note->content = $request->content;
-        $note->keyWords = $request->keyWords;
-        $note->summary = $request->summary;
-        $note->id_topic = $topic->id;
-        $note->save();
-        return redirect()->route('notes.index')->with('success', 'Note updated successfully!');
+        $reminder->title = $request->title;
+        $reminder->content = $request->content;
+        $reminder->value = $request->value;
+        $reminder->event_date = $request->event_date;
+        $reminder->id_topic = $topic->id;
+        $reminder->save();
+        return redirect()->route('reminders.index')->with('success', 'reminder updated successfully!');
     }
 
     public function destroy($id)
     {
-        $note = Note::find($id);
+        $reminder = Reminder::find($id);
 
-        if ($note->id_user != auth()->id()) {
-            return redirect()->route('notes.index')->with('error', 'You do not have permission to delete this note.');
+        if ($reminder->id_user != auth()->id()) {
+            return redirect()->route('reminders.index')->with('error', 'You do not have permission to delete this reminder.');
         }
 
-        $note->delete();
+        $reminder->delete();
 
-        return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
+        return redirect()->route('reminders.index')->with('success', 'reminder deleted successfully!');
     }
 }

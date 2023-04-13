@@ -5,7 +5,7 @@
   <div class="card-header">Edit Page</div>
   <div class="card-body">
       
-      <form action="{{ url('note/' .$note->id) }}" method="post">
+      <form action="{{ url('notes/' .$note->id) }}" method="post">
         {!! csrf_field() !!}
         @method("PATCH")
         <input type="hidden" name="id" id="id" value="{{$note->id}}" id="id" />
@@ -31,5 +31,4 @@
    
   </div>
 </div>
- 
-@stop
+@endsection

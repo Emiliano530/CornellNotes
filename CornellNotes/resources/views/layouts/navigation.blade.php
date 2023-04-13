@@ -16,6 +16,16 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-1 sm:flex">
+                    <x-nav-link :href="'/notes'" :active="request()->routeIs('/notes')">
+                        {{ __('Notas') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-1 sm:flex">
+                    <x-nav-link :href="'/reminders'" :active="request()->routeIs('/reminders')">
+                        {{ __('Recordatorios') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

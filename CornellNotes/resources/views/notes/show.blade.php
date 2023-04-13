@@ -1,7 +1,6 @@
 @extends('notes.layout')
 @section('content')
  
- 
 <div class="card">
   <div class="card-header">Notes Page</div>
   <div class="card-body">
@@ -16,8 +15,6 @@
         <p class="card-text">Asignatura : {{ $note->topics->subjects->subject }}</p>
         
   </div>
-       
-    </hr>
-  
   </div>
 </div>
+@endsection

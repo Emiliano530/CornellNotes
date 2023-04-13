@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ReminderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource("/note", NoteController::class);
+Route::resource("/notes", NoteController::class);
 Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
+
+Route::resource("/reminders", ReminderController::class);
+Route::get('/reminders', [ReminderController::class, 'index'])->name('reminders.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
