@@ -79,23 +79,27 @@ class NoteController extends Controller
 
     
     public function show($id)
-{
-    $note = Note::find($id);
+    {
+        $note = Note::find($id);
 
-    if (!$note) {
-        return view('errors.404')->with('error', 'The note does not exist.');
+        if (!$note) {
+            return view('errors.404')->with('error', 'The note does not exist.');
+        }
+
+        if (Gate::denies('view', $note)) {
+            return redirect()->route('notes.index')->with('error', 'You do not have permission to view this note.');
+        }
+
+        return view('notes.show', compact('note'));
     }
-
-    if (Gate::denies('view', $note)) {
-        return redirect()->route('notes.index')->with('error', 'You do not have permission to view this note.');
-    }
-
-    return view('notes.show', compact('note'));
-}
 
     public function edit($id)
     {
         $note = Note::find($id);
+
+        if (!$note) {
+            return view('errors.404')->with('error', 'The note does not exist.');
+        }
 
         if ($note->id_user != auth()->id()) {
             return redirect()->route('notes.index')->with('error', 'You do not have permission to edit this note.');

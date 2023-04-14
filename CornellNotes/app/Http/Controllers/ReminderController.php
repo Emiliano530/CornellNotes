@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Reminder;
 use App\Models\Subject;
 use App\Models\Topic;
+use App\Policies\ReminderPolicy;
 
 class ReminderController extends Controller
 {
@@ -79,7 +81,11 @@ class ReminderController extends Controller
     {
         $reminder = Reminder::find($id);
 
-        if ($reminder->id_user != auth()->id()) {
+        if (!$reminder) {
+            return view('errors.404')->with('error', 'The reminder does not exist.');
+        }
+
+        if (Gate::denies('view', $reminder)) {
             return redirect()->route('reminders.index')->with('error', 'You do not have permission to view this reminder.');
         }
 
@@ -89,6 +95,10 @@ class ReminderController extends Controller
     public function edit($id)
     {
         $reminder = Reminder::find($id);
+
+        if (!$reminder) {
+            return view('errors.404')->with('error', 'The reminder does not exist.');
+        }
 
         if ($reminder->id_user != auth()->id()) {
             return redirect()->route('reminders.index')->with('error', 'You do not have permission to edit this reminder.');
