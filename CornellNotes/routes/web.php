@@ -21,9 +21,11 @@ Route::get('/', function () {
 });
 
 Route::resource("/notes", NoteController::class);
+Route::redirect('note', 'notes');
 Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
 
 Route::resource("/reminders", ReminderController::class);
+Route::redirect('reminder', 'reminders');
 Route::get('/reminders', [ReminderController::class, 'index'])->name('reminders.index');
 
 Route::get('/dashboard', function () {

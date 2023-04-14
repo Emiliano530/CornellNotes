@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 
 class Reminder extends Model
 {
@@ -61,6 +62,11 @@ class Reminder extends Model
 
             set: fn($value) => $value
         );
+    }
+
+    public function getEventDateAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->locale('es')->isoFormat('DD/MMM/YYYY') : null;
     }
 
 }
