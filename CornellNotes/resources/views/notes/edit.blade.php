@@ -1,7 +1,11 @@
-@extends('notes.layout')
-@section('content')
- 
-<div class="card">
+<x-app-layout>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="card">
+                  <!-- Aqui empieza lo diferente del dashboard -->
+                  <div class="card">
   <div class="card-header">Edit Page</div>
   <div class="card-body">
       
@@ -31,4 +35,9 @@
    
   </div>
 </div>
-@endsection
+<!-- Aqui termina lo diferente del dashboard -->
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
