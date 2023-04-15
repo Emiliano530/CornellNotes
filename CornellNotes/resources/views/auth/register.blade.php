@@ -1,4 +1,5 @@
 <x-guest-layout>
+<x-slot name="headtext"><span name="head" class="ml-2 dark:text-white font-bold text-3xl"><h1>Registrarse</h1></span></x-slot>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -26,9 +27,9 @@
         <!-- Career -->
         <div  class="mt-4">
             <x-input-label for="" :value="__('Carerra')" />
-            <select id="career" class="block mt-1 w-full h-2/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" type="text" name="career" :value="old('career')" required autofocus autocomplete="career">
+            <select id="career" class="block mt-1 w-full h-2/4 border-gray-300 dark:border-gray-700 dark:bg-gray-opacity dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-3xl shadow-sm" type="text" name="career" :value="old('career')" required autofocus autocomplete="career">
             @foreach(DB::table('careers')->get() as $career)
-            <option value="{{ $career->id }}">{{ $career->career }}</option>
+            <option class="border-none" value="{{ $career->id }}">{{ $career->career }}</option>
         @endforeach
         </select>
             <x-input-error :messages="$errors->get('career')" class="mt-2" />
@@ -66,11 +67,11 @@
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+                {{ __('¿Estas registrado?') }}
             </a>
 
             <x-primary-button class="ml-4">
-                {{ __('Register') }}
+                {{ __('Registrar') }}
             </x-primary-button>
         </div>
     </form>

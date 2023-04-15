@@ -21,13 +21,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource("/notes", NoteController::class);
-Route::redirect('note', 'notes');
-Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
-Route::resource("/reminders", ReminderController::class);
+Route::resource("/notes", NoteController::class)->middleware('auth');
+Route::redirect('note', 'notes');
+Route::get('/notes', [NoteController::class, 'index'])->name('notes.index')->middleware('auth');;
+
+Route::resource("/reminders", ReminderController::class)->middleware('auth');
 Route::redirect('reminder', 'reminders');
-Route::get('/reminders', [ReminderController::class, 'index'])->name('reminders.index');
+Route::get('/reminders', [ReminderController::class, 'index'])->name('reminders.index')->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
