@@ -121,6 +121,14 @@ class NoteController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title'=>['required'],
+            'content'=>['required'],
+            'keyWords'=>['required'],
+            'summary'=>['required'],
+            'topic'=>['required'],
+        ]);
+        
         $note = Note::find($id);
 
         if ($note->id_user != auth()->id()) {

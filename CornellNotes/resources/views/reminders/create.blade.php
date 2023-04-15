@@ -12,9 +12,19 @@
       <form action="{{ url('reminders') }}" method="post">
         {!! csrf_field() !!}
         <label>Titulo</label></br>
-        <input type="text" name="title" id="title" class="form-control"></br>
+        <input type="text" name="title" id="title" class="form-control">
+        @error('title')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Contenido</label></br>
-        <input type="text" name="content" id="content" class="form-control"></br>
+        <input type="text" name="content" id="content" class="form-control">
+        @error('content')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Importancia</label></br>
         <select id="value" class="block mt-1 w-full h-2/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" type="number" name="value" :value="old('value')" required autofocus autocomplete="value">
         <option value="1">Muy importante</option>
@@ -23,9 +33,19 @@
         <option value="4">No importante</option>
         </select>
         <label>Fecha de evento</label></br>
-        <input type="date" name="event_date" id="event_date" class="form-control"></br>
+        <input type="date" name="event_date" id="event_date" class="form-control">
+        @error('event_date')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Tema</label></br>
-        <input type="text" name="topic" id="topic" class="form-control"></br>
+        <input type="text" name="topic" id="topic" class="form-control">
+        @error('topic')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Asignatura</label></br>
 <select id="subject" class="block mt-1 w-full h-2/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" type="text" name="subject" :value="old('subject')" required autofocus autocomplete="subject">
     @foreach($subjects as $subjectId => $subjectName)

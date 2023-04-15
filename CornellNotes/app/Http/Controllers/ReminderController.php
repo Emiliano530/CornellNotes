@@ -46,6 +46,13 @@ class ReminderController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title'=>['required'],
+            'content'=>['required'],
+            'event_date'=>['required'],
+            'topic'=>['required'],
+        ]);
+
         $user_id = auth()->id();
 
         // Buscar el tema por nombre y asignatura
@@ -111,6 +118,13 @@ class ReminderController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title'=>['required'],
+            'content'=>['required'],
+            'event_date'=>['required'],
+            'topic'=>['required'],
+        ]);
+        
         $reminder = Reminder::find($id);
 
         if ($reminder->id_user != auth()->id()) {

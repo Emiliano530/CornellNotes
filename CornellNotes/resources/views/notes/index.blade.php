@@ -26,9 +26,6 @@
                         <h2>Laravel 9 Crud</h2>
                     </div>
                     <div class="card-body">
-                        <a href="{{ url('/notes/create') }}" class="btn btn-success btn-sm" title="Add New Note">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
                         <br/>
                         <br/>
                         <div class="table-responsive">
@@ -63,15 +60,27 @@
                                             <form method="POST" action="{{ url('/notes' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Note" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Note" onclick="return confirm(&quot;¿Estás seguro? Se eliminará definitivamente&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            
                         </div>
- 
+
+                        <div class="fixed bottom-90 right-4">
+  <a href="{{ url('/notes/create') }}">
+    <button class="group bg-gray-500 hover:bg-gray-700 text-white font-bold py-3 px-3 rounded-full">
+      <svg class="w-6 h-6 text-white group-hover:inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
+      </svg>
+      <span class="hidden group-hover:inline-block ml-2 pr-2">Nuevo</span>
+    </button>
+  </a>
+</div>
+
                     </div>
                 </div>
             </div>

@@ -14,15 +14,40 @@
         @method("PATCH")
         <input type="hidden" name="id" id="id" value="{{$note->id}}" id="id" />
         <label>Titulo</label></br>
-        <input type="text" name="title" id="title" value="{{$note->title}}" class="form-control"></br>
+        <input type="text" name="title" id="title" value="{{$note->title}}" class="form-control">
+        @error('title')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Contenido</label></br>
-        <input type="text" name="content" id="content" value="{{$note->content}}" class="form-control"></br>
+        <input type="text" name="content" id="content" value="{{$note->content}}" class="form-control">
+        @error('content')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Palabras clave</label></br>
-        <input type="text" name="keyWords" id="keyWords" value="{{$note->keyWords}}" class="form-control"></br>
+        <input type="text" name="keyWords" id="keyWords" value="{{$note->keyWords}}" class="form-control">
+        @error('keyWords')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Resumen</label></br>
-        <input type="text" name="summary" id="summary" value="{{$note->summary}}" class="form-control"></br>
+        <input type="text" name="summary" id="summary" value="{{$note->summary}}" class="form-control">
+        @error('summary')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Tema</label></br>
-        <input type="text" name="topic" id="topic" value="{{$note->topics->topic}}" class="form-control"></br>
+        <input type="text" name="topic" id="topic" value="{{$note->topics->topic}}" class="form-control">
+        @error('topic')
+            <br>
+            <small class="text-red-900">{{ $message }}</small>
+        @enderror
+        </br>
         <label>Asignatura</label></br>
 <select id="subject" class="block mt-1 w-full h-2/4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" type="text" name="subject" :value="old('subject')" required autofocus autocomplete="subject">
     @foreach($subjects as $subjectId => $subjectName)
