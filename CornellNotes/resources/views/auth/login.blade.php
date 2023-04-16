@@ -47,7 +47,7 @@
         </div>
         <div class="flex flex-col items-center justify-center mt-4">
     <p class="mb-2 text-gray-400 t">¿No tienes una cuenta?</p>
-    <a class="underline text-lg text-gray-600 dark:text-green-400 hover:text-gray-900 dark:hover:text-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 mt-2" href="{{ route('register') }}">
+    <a class="underline text-lg text-gray-600 dark:text-green-500 hover:text-gray-900 dark:hover:text-green-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 mt-2" href="{{ route('register') }}">
         {{ __('Crear cuenta') }}
     </a>
 </div>

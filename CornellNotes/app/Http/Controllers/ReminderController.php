@@ -80,7 +80,7 @@ class ReminderController extends Controller
         $reminder->id_topic = $topic->id;
         $reminder->save();
     
-        return redirect()->route('reminders.index')->with('success', 'reminder created successfully!');
+        return redirect()->route('reminders.index')->with('success', 'Reminder deleted successfully!');
 
     }
 
@@ -93,7 +93,7 @@ class ReminderController extends Controller
         }
 
         if (Gate::denies('view', $reminder)) {
-            return redirect()->route('reminders.index')->with('error', 'You do not have permission to view this reminder.');
+            return redirect()->back()->with('error', 'You do not have permission to view this reminder.');
         }
 
         return view('reminders.show', compact('reminder'));
@@ -108,7 +108,7 @@ class ReminderController extends Controller
         }
 
         if ($reminder->id_user != auth()->id()) {
-            return redirect()->route('reminders.index')->with('error', 'You do not have permission to edit this reminder.');
+            return redirect()->back()->with('error', 'You do not have permission to edit this reminder.');
         }
 
         $user_id = auth()->id();
@@ -128,7 +128,7 @@ class ReminderController extends Controller
         $reminder = Reminder::find($id);
 
         if ($reminder->id_user != auth()->id()) {
-            return redirect()->route('reminders.index')->with('error', 'You do not have permission to edit this reminder.');
+            return redirect()->back()->with('error', 'You do not have permission to edit this reminder.');
         }
 
         $user_id = auth()->id();
@@ -154,7 +154,7 @@ class ReminderController extends Controller
         $reminder->event_date = $request->event_date;
         $reminder->id_topic = $topic->id;
         $reminder->save();
-        return redirect()->route('reminders.index')->with('success', 'reminder updated successfully!');
+        return redirect()->back()->with('success', 'reminder updated successfully!');
     }
 
     public function destroy($id)
@@ -162,11 +162,11 @@ class ReminderController extends Controller
         $reminder = Reminder::find($id);
 
         if ($reminder->id_user != auth()->id()) {
-            return redirect()->route('reminders.index')->with('error', 'You do not have permission to delete this reminder.');
+            return redirect()->back()->with('error', 'You do not have permission to delete this reminder.');
         }
 
         $reminder->delete();
 
-        return redirect()->route('reminders.index')->with('success', 'reminder deleted successfully!');
+        return redirect()->back()->with('success', 'reminder deleted successfully!');
     }
 }

@@ -49,7 +49,7 @@
                 </div>
             @endif
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 p-8 pt-24">
+            <div class="mx-aut sm:px-6 lg:px-8 p-8 pt-24">
             <div class="flex justify-center items-center pt-8 sm:justify-start sm:pt-0">
             @if (Route::has('login'))
                     @auth
@@ -57,7 +57,7 @@
   <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
 </svg>
 @else
-<x-application-logo class="ml-3">
+<x-application-logo class="ml-3 ">
             </x-application-logo>
                     @endauth
             
@@ -65,12 +65,8 @@
     <span class="ml-2 dark:text-white font-bold text-4xl"><h1>Notas de Cornell</h1></span>
 </div>
 
-                <div class="mt-8 bg-white dark:bg-cyan-950 overflow-hidden shadow sm:rounded-3xl">
-
-                <!-- Aqui empieza lo que yo hice-->
-                <div class="container m-4 mx-auto px-6">
-  
-    <x-principal-card>
+<x-container-principal>
+<x-principal-card>
     <x-slot name="title">¿Qué es el método Cornell?</x-slot>
     <x-slot name="content">El método Cornell es un sistema para tomar notas o apuntes creado en la Universidad de Cornell en la década de los 40 pero que se utiliza cada vez más por sus beneficios para el aprendizaje en educación y por sus ventajas para resumir y sintetizar ideas importantes. El método Cornell fue ideado por Walter Paul, doctor en Psicología en esta universidad. El profesor analizó todas las técnicas que utilizaban sus alumnos para repasar y estudiar y todas las fórmulas que ponían en práctica para tomar apuntes. Con toda esta información escribió el libro “Cómo estudiar en la universidad”. </x-slot>
 </x-principal-card>
@@ -84,8 +80,9 @@
     <x-slot name="title">¿Qué hacemos?</x-slot>
     <x-slot name="content">En esta página buscamos facilitar la realización de notas utilizando el método de Cornell, esto con el fin de tener organizadas todas las notas y además tener la facilidad de realizarlo de manera digital. La toma de notas consiste en anotar las ideas y conectores clave del discurso, de forma que estas notas sirvan de apoyo a la memoria. Esta página además tiene el extra de poder ayudar a recordar eventos relacionados a asignaturas con los recordatorios.</x-slot>
 </x-secondary-card>
-  </div>
-</div>
+</x-container-principal>
+
+
 <!-- Aqui termina lo que yo hice-->
 
                 </div>

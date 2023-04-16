@@ -70,16 +70,19 @@
                             
                         </div>
 
-                        <div class="fixed bottom-90 right-4">
-  <a href="{{ url('/notes/create') }}">
-    <button class="group bg-gray-500 hover:bg-gray-700 text-white font-bold py-3 px-3 rounded-full">
-      <svg class="w-6 h-6 text-white group-hover:inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <x-floating-button>
+                                <x-slot name="url">/notes/create</x-slot>
+                                <x-slot name="icon">
+                                    <svg  fill="none" viewBox="0 0 24 24" stroke="white">
+                                        <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
+                                    </svg>
+                                </x-slot>
+                                Nuevo
+                        </x-floating-button>
+                       
+                        <svg class="w-6 h-6 text-white group-hover:inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
       </svg>
-      <span class="hidden group-hover:inline-block ml-2 pr-2">Nuevo</span>
-    </button>
-  </a>
-</div>
 
                     </div>
                 </div>
