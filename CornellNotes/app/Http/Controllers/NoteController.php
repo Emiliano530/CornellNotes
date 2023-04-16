@@ -82,7 +82,7 @@ class NoteController extends Controller
         $note->id_topic = $topic->id;
         $note->save();
     
-        return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
+        return redirect()->route('notes.index')->with('success', 'Note created successfully!');
 
     }
 
