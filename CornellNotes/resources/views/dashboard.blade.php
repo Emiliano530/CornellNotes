@@ -24,32 +24,28 @@
             <x-container-content>
                 @if((count($notes) >0))
                     @foreach($notes as $key => $note)
-                        <x-card-data>
-                            <x-slot name="class">
-                                {{ $key === 0 && count($notes) === 1 ? 'rounded-3xl' : '' }}
-                                {{ $key === 0 && count($notes) > 1 ? 'rounded-l-3xl' : '' }}
-                                {{ $key === (count($notes) - 1) && count($notes) > 1 ? 'rounded-r-3xl' : '' }}
-                            </x-slot>
+                        <x-card-data class="{{ $key === 0 && count($notes) === 1 ? 'rounded-3xl' : '' }}
+                        {{ $key === 0 && count($notes) > 1 ? 'rounded-l-3xl' : '' }}
+                        {{ $key === (count($notes) - 1) && count($notes) > 1 ? 'rounded-r-3xl' : '' }}
+                        bg-green-700">
                             <x-header-card-data>
                                 <x-slot name="col1">
-                                    <a><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-white group-hover:stroke-cyan-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                    </svg></a>
+                                    <h1 class="text-lg text-white uppercase">#{{$loop->iteration}}</h1>
                                 </x-slot>
                                 <x-slot name="col2">
                                     <x-delete-button-icon>
                                         <x-slot name="url">{{ url('/notes' . '/' . $note->id) }}</x-slot>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 stroke-white group-hover:stroke-cyan-500 group-hover:hover:stroke-red-400" className="w-6 h-6 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 stroke-white group-hover:stroke-cyan-400 group-hover:hover:stroke-red-500 stroke-2" className="w-6 h-6 ">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </x-delete-button-icon>
                                 </x-slot>
                             </x-header-card-data>
-                            <x-content-card-data>
+                            <x-content-card-data class="group-hover:text-cyan-400 ">
                                 <x-slot name="title">{{ $note->title }}</x-slot>
                                 <x-slot name="content">{{ $note->content }}</x-slot>
                             </x-content-card-data>
-                            <x-link-arrow-animation>
+                            <x-link-arrow-animation class="group-hover:text-cyan-400">
                                 <x-slot name="url">{{ url('/notes/' . $note->id) }}</x-slot>
                                 Ver Nota
                             </x-link-arrow-animation>
@@ -62,10 +58,7 @@
                         </h2>
                         <br>
                         <a href="{{ url('/notes/create') }}">
-                            <x-primary-button>
-                                <x-slot name="class">
-                                    dark:hover:bg-green-700 dark:bg-green-900 dark:focus:bg-green-900 dark:active:bg-green-900
-                                </x-slot>
+                            <x-primary-button class="dark:hover:bg-green-700 dark:bg-green-900 dark:focus:bg-green-900 dark:active:bg-green-900">
                                 Agregemos una
                             </x-primary-button>
                         </a>
@@ -90,37 +83,33 @@
             <x-container-content>
                 @if((count($reminders) >0))
                     @foreach($reminders as $key => $reminder)
-                        <x-card-data>
-                            <x-slot name="class">
-                                {{ $key === 0 && count($reminders) === 1 ? 'rounded-3xl' : '' }}
-                                {{ $key === 0 && count($reminders) > 1 ? 'rounded-l-3xl' : '' }}
-                                {{ $key === (count($reminders) - 1) && count($reminders) > 1 ? 'rounded-r-3xl' : '' }}
-                            </x-slot>
+                        <x-card-data class="{{ $key === 0 && count($reminders) === 1 ? 'rounded-3xl' : '' }}
+                        {{ $key === 0 && count($reminders) > 1 ? 'rounded-l-3xl' : '' }}
+                        {{ $key === (count($reminders) - 1) && count($reminders) > 1 ? 'rounded-r-3xl' : '' }}
+                        bg-cyan-700">
                             <x-header-card-data>
                                 <x-slot name="col1">
-                                    <a><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" class="w-6 h-6 stroke-white group-hover:stroke-cyan-500">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                            </svg></a>
+                                    <h1 class="text-lg text-white uppercase">#{{$loop->iteration}}</h1>
                                 </x-slot>
                                 <x-slot name="col2">
                                     <x-delete-button-icon>
                                         <x-slot name="url">{{ url('/reminders' . '/' . $reminder->id) }}</x-slot>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 stroke-white group-hover:stroke-cyan-500 group-hover:hover:stroke-red-400" className="w-6 h-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 stroke-white group-hover:stroke-lime-500 group-hover:hover:stroke-red-500 stroke-2" className="w-6 h-6 ">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </x-delete-button-icon>
                                 </x-slot>
                             </x-header-card-data>
-                            <x-content-card-data>
+                            <x-content-card-data class="group-hover:text-lime-400">
                                 <x-slot name="title">{{ $reminder->title }}</x-slot>
                                 <x-slot name="content">{{ $reminder->content }}</x-slot>
                             </x-content-card-data>
-                            <x-link-arrow-animation>
+                            <x-link-arrow-animation class="group-hover:text-lime-500">
                                 <x-slot name="url">{{ url('/reminders/' . $reminder->id) }}</x-slot>
                                 Ver Recordatorio
                             </x-link-arrow-animation>
                         </x-card-data>
-                    @endforeach  
+                    @endforeach
                 @else
                     <div class="col-span-full text-center mb-24 mt-10 text-cyan-500">
                         <h2>
@@ -128,10 +117,7 @@
                         </h2>
                         <br>
                         <a href="{{ url('/reminders/create') }}">
-                            <x-primary-button>
-                                <x-slot name="class">
-                                    dark:hover:bg-green-700 dark:bg-green-900 dark:focus:bg-green-900 dark:active:bg-green-900
-                                </x-slot>
+                            <x-primary-button class="dark:hover:bg-green-700 dark:bg-green-900 dark:focus:bg-green-900 dark:active:bg-green-900">
                                 Agregemos uno
                             </x-primary-button>
                         </a>

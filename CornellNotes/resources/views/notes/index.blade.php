@@ -7,7 +7,7 @@
 
     <x-container-principal>
         <x-container-secondary>
-            <x-container-header>
+            <x-container-header class="pb-4">
                 <x-slot name="col1">
                     <form action="{{ route('notes.index') }}" method="GET">
                         <div class="form-group">
@@ -22,56 +22,54 @@
                     </form>
                 </x-slot>
             </x-container-header>
-            
-            <x-table>
-                <x-slot name="header">
-                    <th class="py-3 px-6 text-left">#</th>
-                    <th class="py-3 px-6 text-left">Titulo</th>
-                    <th class="py-3 px-6 text-center">Palabras clave</th>
-                    <th class="py-3 px-6 text-center">Tema</th>
-                    <th class="py-3 px-6 text-center">Asignatura</th>
-                    <th class="py-3 px-6 text-center">Acciones</th>
+            <x-container-header class="pt-0">
+                <x-slot name="col1">
+                    <p class="text-white">Aqui estan todas tus notas</p>
+                    <p class="text-gray-300 text-sm">tienes <span class="text-green-500">{{count($notes)}}</span> nota{{ count($notes) !== 1 ? 's' : '' }}</p>
                 </x-slot>
-                <x-slot name="body">
-                    @foreach($notes as $item)
-                        <tr class="border-b border-cyan-200 hover:bg-cyan-100 hover:rounded-3xl">
-                            <td class="py-3 px-6 text-center whitespace-nowrap">{{ $loop->iteration }}</td>
-                            <td class="py-3 px-6 text-center whitespace-nowrap">{{ $item->title }}</td>
-                            <td class="py-3 px-6 text-center whitespace-nowrap">{{ $item->keyWords }}</td>
-                            <td class="py-3 px-6 text-center whitespace-nowrap">{{ $item->topics->topic }}</td>
-                            <td class="py-3 px-6 text-center whitespace-nowrap">{{ $item->topics->subjects->subject}}</td>
-
-                            <td class="py-3 px-6 text-center whitespace-nowrap">
-                                <div class="flex item-center justify-center">
-                                    <a href="{{ url('/notes/' . $item->id) }}" title="View Note">
-                                        <div class="w-4 mr-2 transform hover:text-green-600 hover:scale-110">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </x-container-header>
+            <x-container-content>
+                @if((count($notes) >0))
+                    @foreach($notes as $key => $note)
+                            <x-card-data class="
+                            {{ $key === 0 && count($notes) === 1 ? 'rounded-3xl' : '' }}
+                            {{ $key % 5 === 0 ? 'rounded-l-3xl border-none' : '' }}
+                            {{ ($key + 1) % 5 === 0 ? 'rounded-r-3xl' : '' }}
+                            {{ $key % 5 === 0 ? 'rounded-tl-3xl rounded-bl-3xl' : '' }}
+                            {{ ($key + 1) % 5 === 0 ? 'rounded-tr-3xl rounded-br-3xl' : '' }}
+                            {{ $key === (count($notes) - 1) && count($noters) > 1 ? 'rounded-r-3xl' : '' }}
+                            bg-green-700">
+                                <x-header-card-data>
+                                    <x-slot name="col1">
+                                        <h1 class="text-lg text-white uppercase">#{{$loop->iteration}}</h1>
+                                    </x-slot>
+                                    <x-slot name="col2">
+                                        <x-delete-button-icon>
+                                            <x-slot name="url">{{ url('/notes' . '/' . $note->id) }}</x-slot>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 stroke-white group-hover:stroke-cyan-400 group-hover:hover:stroke-red-500 stroke-2" className="w-6 h-6 ">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
-                                        </div>
-                                    </a>
-                                    <a href="{{ url('/notes/' . $item->id . '/edit') }}" title="View Note">
-                                        <div class="w-4 mr-2 transform hover:text-purple-600 hover:scale-110">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                            </svg>                                              
-                                        </div>
-                                    </a>
-                                    <x-delete-button-icon>
-                                        <x-slot name="url">{{ url('/notes' . '/' . $item->id) }}</x-slot>
-                                        <div class="w-4 mr-2 transform hover:text-red-600 hover:scale-110">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                            </svg>
-                                        </div>
-                                    </x-delete-button-icon>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </x-slot>
-            </x-table>
+                                        </x-delete-button-icon>
+                                    </x-slot>
+                                </x-header-card-data>
+                                <x-content-card-data class="group-hover:text-cyan-400 ">
+                                    <x-slot name="title">{{ $note->title }}</x-slot>
+                                    <x-slot name="content">{{ $note->content }}</x-slot>
+                                </x-content-card-data>
+                                <x-link-arrow-animation class="group-hover:text-cyan-400">
+                                    <x-slot name="url">{{ url('/notes/' . $note->id) }}</x-slot>
+                                    Ver Nota
+                                </x-link-arrow-animation>
+                            </x-card-data>
+                        @endforeach
+                @else
+                    <div class="col-span-full text-center mb-24 mt-10 text-cyan-500">
+                        <h2>
+                            No hay notas que mostrar
+                        </h2>
+                    </div>
+                @endif
+            </x-container-content>
         </x-container-secondary>
     </x-container-principal>
     <x-floating-button>

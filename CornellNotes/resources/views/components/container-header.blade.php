@@ -9,7 +9,7 @@
     </div>
 @else
     <div class="grid w-full bg-transparent">
-        <div class="p-8 text-center rounded-l-3xl">
+        <div class="p-8 text-center rounded-l-3xl {{ isset($class) ? $class : '' }}">
             {{ $col1 ?? '' }}
         </div>
     </div>
