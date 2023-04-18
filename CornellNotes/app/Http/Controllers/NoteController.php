@@ -91,6 +91,7 @@ class NoteController extends Controller
     public function show($id)
     {
         $note = Note::find($id);
+        $subjects = Subject::where('id_career', auth()->user()->id_career)->pluck('subject', 'id');
 
         if (!$note) {
             return view('errors.404')->with('error', 'The note does not exist.');
@@ -100,7 +101,7 @@ class NoteController extends Controller
             return redirect()->back()->with('error', 'You do not have permission to view this note.');
         }
 
-        return view('notes.show', compact('note'));
+        return view('notes.show', compact('note','subjects'));
     }
 
     public function edit($id)
@@ -159,7 +160,7 @@ class NoteController extends Controller
         $note->summary = $request->summary;
         $note->id_topic = $topic->id;
         $note->save();
-        return redirect()->back()->with('success', 'Note updated successfully!');
+        return redirect()->route('notes.index')->with('success', 'Note updated successfully!');
     }
 
     public function destroy($id)
@@ -172,6 +173,6 @@ class NoteController extends Controller
 
         $note->delete();
 
-        return redirect()->back()->with('success', 'Note deleted successfully!');
+        return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
     }
 }

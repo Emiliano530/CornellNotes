@@ -20,9 +20,9 @@
                   <div class="col-span-4 border-transparent border-b-black border-2 w-auto p-2">
                     <textarea type="text" name="topic" id="topic"  value="{{ old('topic') }}"
                     class="form-control autoresize w-full min-h-10 h-10 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Tema"></textarea>
-                    @error('tema')
+                    @error('topic')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-900">{{ $message }}</small><br>
                     @enderror
                     @auth
                         <label>{{auth()->user()->name}} {{auth()->user()->lastName}}</label></br>
@@ -32,15 +32,28 @@
                   <div class="col-span-3 border-transparent border-b-black border-r-black border-2 w-auto p-2">
                     <textarea type="text" name="keyWords" id="keyWords"  value="{{ old('keyWords') }}"
                     class="form-control autoresize w-full min-h-10 h-96 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Palabras clave"></textarea>
-                  </div>
+                    @error('keyWords')
+                        <br>
+                        <small class="text-red-900">{{ $message }}</small>
+                    @enderror
+                </div>
                   <div class="col-span-9 border-transparent border-b-black border-2 w-auto p-2">
                     <textarea type="text" name="content" id="content"  value="{{ old('content') }}"
                     class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Notas"></textarea>
-                  </div>
+                    @error('content')
+                        <br>
+                        <small class="text-red-900">{{ $message }}</small>
+                    @enderror
+                </div>
+                    
                   <div class="col-span-12 border border-transparent w-auto p-2">
                     <textarea type="text" name="summary" id="summary"  value="{{ old('summary') }}"
                     class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Resumen"></textarea>
-                  </div>
+                    @error('summary')
+                        <br>
+                        <small class="text-red-900">{{ $message }}</small>
+                    @enderror
+                </div>
         </x-container-secondary>
     </x-container-principal>
         <div  class="m-4 text-center">
@@ -50,7 +63,7 @@
                     <option value="{{ $subjectId }}">{{ $subjectName }}</option>
                 @endforeach
             </select>
-            <input type="submit" value="Crear" class="btn btn-success m-2 inline-flex items-center px-4 py-2 bg-white dark:bg-black border border-gray-300 dark:border-gray-500 rounded-3xl font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150'">
+            <input type="submit" value="Crear" class="btn btn-success hover:cursor-pointer m-2 inline-flex items-center px-4 py-2 bg-white dark:bg-black border border-gray-300 dark:border-gray-500 rounded-3xl font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150">
         </div>
     </form>
 </x-app-layout>
