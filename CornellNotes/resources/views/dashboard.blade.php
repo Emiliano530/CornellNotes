@@ -24,13 +24,17 @@
             <x-container-content>
                 @if((count($notes) >0))
                     @foreach($notes as $key => $note)
-                        <x-card-data class="{{ $key === 0 && count($notes) === 1 ? 'rounded-3xl' : '' }}
-                        {{ $key === 0 && count($notes) > 1 ? 'rounded-l-3xl' : '' }}
+                        <x-card-data class="
+                        {{ $key === 0 && count($notes) === 1 ? 'rounded-3xl' : '' }}
+                        {{ $key % 5 === 0 ? 'rounded-l-3xl border-none' : '' }}
+                        {{ ($key + 1) % 5 === 0 ? 'rounded-r-3xl' : '' }}
+                        {{ $key % 5 === 0 ? 'rounded-tl-3xl rounded-bl-3xl' : '' }}
+                        {{ ($key + 1) % 5 === 0 ? 'rounded-tr-3xl rounded-br-3xl' : '' }}
                         {{ $key === (count($notes) - 1) && count($notes) > 1 ? 'rounded-r-3xl' : '' }}
                         bg-green-700">
                             <x-header-card-data>
                                 <x-slot name="col1">
-                                    <h1 class="text-lg text-white uppercase">#{{$loop->iteration}}</h1>
+                                    <h1 class="text-lg text-white uppercase group-hover:text-cyan-400">#{{$loop->iteration}}</h1>
                                 </x-slot>
                                 <x-slot name="col2">
                                     <x-delete-button-icon>
@@ -83,13 +87,17 @@
             <x-container-content>
                 @if((count($reminders) >0))
                     @foreach($reminders as $key => $reminder)
-                        <x-card-data class="{{ $key === 0 && count($reminders) === 1 ? 'rounded-3xl' : '' }}
-                        {{ $key === 0 && count($reminders) > 1 ? 'rounded-l-3xl' : '' }}
+                        <x-card-data class="
+                        {{ $key === 0 && count($reminders) === 1 ? 'rounded-3xl' : '' }}
+                        {{ $key % 5 === 0 ? 'rounded-l-3xl border-none' : '' }}
+                        {{ ($key + 1) % 5 === 0 ? 'rounded-r-3xl' : '' }}
+                        {{ $key % 5 === 0 ? 'rounded-tl-3xl rounded-bl-3xl' : '' }}
+                        {{ ($key + 1) % 5 === 0 ? 'rounded-tr-3xl rounded-br-3xl' : '' }}
                         {{ $key === (count($reminders) - 1) && count($reminders) > 1 ? 'rounded-r-3xl' : '' }}
                         bg-cyan-700">
                             <x-header-card-data>
                                 <x-slot name="col1">
-                                    <h1 class="text-lg text-white uppercase">#{{$loop->iteration}}</h1>
+                                    <h1 class="text-lg text-white uppercase group-hover:text-lime-500">#{{$loop->iteration}}</h1>
                                 </x-slot>
                                 <x-slot name="col2">
                                     <x-delete-button-icon>

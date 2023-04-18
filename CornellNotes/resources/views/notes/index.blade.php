@@ -24,8 +24,13 @@
             </x-container-header>
             <x-container-header class="pt-0">
                 <x-slot name="col1">
-                    <p class="text-white">Aqui estan todas tus notas</p>
-                    <p class="text-gray-300 text-sm">tienes <span class="text-green-500">{{count($notes)}}</span> nota{{ count($notes) !== 1 ? 's' : '' }}</p>
+                    @if (isset($search))
+                        <p class="text-white">Estos son los resultados</p>
+                        <p class="text-gray-300 text-sm">hay <span class="text-green-500">{{count($notes)}}</span> nota{{ count($notes) !== 1 ? 's' : '' }}</p>
+                    @else
+                        <p class="text-white">Aqui estan todas tus notas</p>
+                        <p class="text-gray-300 text-sm">tienes <span class="text-green-500">{{count($notes)}}</span> nota{{ count($notes) !== 1 ? 's' : '' }}</p>
+                    @endif
                 </x-slot>
             </x-container-header>
             <x-container-content>
@@ -37,11 +42,11 @@
                             {{ ($key + 1) % 5 === 0 ? 'rounded-r-3xl' : '' }}
                             {{ $key % 5 === 0 ? 'rounded-tl-3xl rounded-bl-3xl' : '' }}
                             {{ ($key + 1) % 5 === 0 ? 'rounded-tr-3xl rounded-br-3xl' : '' }}
-                            {{ $key === (count($notes) - 1) && count($noters) > 1 ? 'rounded-r-3xl' : '' }}
+                            {{ $key === (count($notes) - 1) && count($notes) > 1 ? 'rounded-r-3xl' : '' }}
                             bg-green-700">
                                 <x-header-card-data>
                                     <x-slot name="col1">
-                                        <h1 class="text-lg text-white uppercase">#{{$loop->iteration}}</h1>
+                                        <h1 class="text-lg text-white uppercase group-hover:text-cyan-400">#{{$loop->iteration}}</h1>
                                     </x-slot>
                                     <x-slot name="col2">
                                         <x-delete-button-icon>

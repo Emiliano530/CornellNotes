@@ -24,8 +24,13 @@
             </x-container-header>
             <x-container-header class="pt-0">
                 <x-slot name="col1">
-                    <p class="text-white">Aqui estan todas tus notas</p>
-                    <p class="text-gray-300 text-sm">tienes <span class="text-green-500">{{count($reminders)}}</span> recordatorio{{ count($reminders) !== 1 ? 's' : '' }}</p>
+                    @if (isset($search))
+                        <p class="text-white">Estos son los resultados</p>
+                        <p class="text-gray-300 text-sm">hay <span class="text-green-500">{{count($reminders)}}</span> coincidencia{{ count($reminders) !== 1 ? 's' : '' }}</p>
+                    @else
+                        <p class="text-white">Aqui estan todos tus recordatorios</p>
+                        <p class="text-gray-300 text-sm">tienes <span class="text-green-500">{{count($reminders)}}</span> recordatorio{{ count($reminders) !== 1 ? 's' : '' }}</p>
+                    @endif
                 </x-slot>
             </x-container-header>
             <x-container-content>
@@ -41,7 +46,7 @@
                         bg-cyan-700">
                             <x-header-card-data>
                                 <x-slot name="col1">
-                                    <h1 class="text-lg text-white uppercase">#{{$loop->iteration}}</h1>
+                                    <h1 class="text-lg text-white uppercase group-hover:text-lime-500">#{{$loop->iteration}}</h1>
                                 </x-slot>
                                 <x-slot name="col2">
                                     <x-delete-button-icon>
