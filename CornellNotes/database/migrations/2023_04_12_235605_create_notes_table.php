@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('content');
             $table->string('keyWords');
             $table->string('summary');
+            $table->string('updates')->nullable();
             $table->date('creation_date');
 
             $table->foreignId('id_user')

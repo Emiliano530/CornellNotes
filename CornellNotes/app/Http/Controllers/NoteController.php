@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Note;
 use App\Models\Subject;
 use App\Models\Topic;
+use App\Models\User;
 use App\Policies\NotePolicy;
 
 class NoteController extends Controller
