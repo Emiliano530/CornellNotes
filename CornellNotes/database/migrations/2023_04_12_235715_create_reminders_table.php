@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('reminders', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
+            $table->string('title')->nullable();
+            $table->text('content')->nullable();
             $table->integer('value');
             $table->date('creation_date');
-            $table->date('event_date');
+            $table->dateTime('event_date');
 
             $table->foreignId('id_user')
                 ->constrained('users')

@@ -10,16 +10,16 @@
         <x-container-secondary class="bg-white bg-opacity-100">
             <div class="grid grid-cols-12 bg-zinc-50 rounded-3xl">
                 <div class="col-span-8 border-transparent border-b-black border-r-black border-2 w-auto p-2 ">
-                    <textarea type="text" name="title" id="title"  value="{{ old('title') }}"
-                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black align-middle" placeholder="Titulo"></textarea>
+                    <textarea type="text" name="title" id="title"
+                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black align-middle" placeholder="Titulo">{{ old('title') }}</textarea>
                     @error('title')
                         <br>
                         <small class="text-red-900">{{ $message }}</small>
                     @enderror
                   </div>
                   <div class="col-span-4 border-transparent border-b-black border-2 w-auto p-2">
-                    <textarea type="text" name="topic" id="topic"  value="{{ old('topic') }}"
-                    class="form-control autoresize w-full min-h-10 h-10 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Tema"></textarea>
+                    <textarea type="text" name="topic" id="topic"
+                    class="form-control autoresize w-full min-h-10 h-10 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Tema">{{ old('topic') }}</textarea>
                     @error('topic')
                         <br>
                         <small class="text-red-900">{{ $message }}</small><br>
@@ -30,16 +30,16 @@
                     <label>{{date("d/m/Y")}}</label></br>
                   </div>
                   <div class="col-span-3 border-transparent border-b-black border-r-black border-2 w-auto p-2">
-                    <textarea type="text" name="keyWords" id="keyWords"  value="{{ old('keyWords') }}"
-                    class="form-control autoresize w-full min-h-10 h-96 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Palabras clave"></textarea>
+                    <textarea type="text" name="keyWords" id="keyWords"
+                    class="form-control autoresize w-full min-h-10 h-96 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Palabras clave">{{ old('keyWords') }}</textarea>
                     @error('keyWords')
                         <br>
                         <small class="text-red-900">{{ $message }}</small>
                     @enderror
                 </div>
                   <div class="col-span-9 border-transparent border-b-black border-2 w-auto p-2">
-                    <textarea type="text" name="content" id="content"  value="{{ old('content') }}"
-                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Notas"></textarea>
+                    <textarea type="text" name="content" id="content"
+                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Notas">{{ old('content') }}</textarea>
                     @error('content')
                         <br>
                         <small class="text-red-900">{{ $message }}</small>
@@ -47,8 +47,8 @@
                 </div>
                     
                   <div class="col-span-12 border border-transparent w-auto p-2">
-                    <textarea type="text" name="summary" id="summary"  value="{{ old('summary') }}"
-                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Resumen"></textarea>
+                    <textarea type="text" name="summary" id="summary"
+                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Resumen">{{ old('summary') }}</textarea>
                     @error('summary')
                         <br>
                         <small class="text-red-900">{{ $message }}</small>

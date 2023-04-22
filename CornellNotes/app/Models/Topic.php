@@ -17,10 +17,6 @@ class Topic extends Model
     public function notes() {
         return $this->hasMany(note::class,'id_topic');
     }
-    
-    public function reminders() {
-        return $this->hasMany(reminder::class,'id_topic');
-    }
 
     public $timestamps = false;
 

@@ -20,13 +20,7 @@ class ReminderController extends Controller
             $reminders = Reminder::where('id_user', $user_id)
                         ->where(function($queryBuilder) use ($search) {
                             $queryBuilder->where('title', 'like', '%'.$search.'%')
-                                        ->orWhere('content', 'like', '%'.$search.'%')
-                                        ->orWhereHas('topics', function($query) use ($search) {
-                                            $query->where('topic', 'like', '%'.$search.'%')
-                                                  ->orWhereHas('subjects', function($query) use ($search) {
-                                                        $query->where('subject', 'like', '%'.$search.'%');
-                                                  });
-                                        });
+                                        ->orWhere('content', 'like', '%'.$search.'%');
                         })
                         ->get();
         } else {
@@ -39,36 +33,17 @@ class ReminderController extends Controller
 
     public function create()
     {
-        $user_id = auth()->id();
-        $subjects = Subject::where('id_career', auth()->user()->id_career)->pluck('subject', 'id');
-        return view('reminders.create', compact('subjects'));
+        return view('reminders.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'title'=>['required'],
-            'content'=>['required'],
             'event_date'=>['required'],
-            'topic'=>['required'],
         ]);
 
         $user_id = auth()->id();
-
-        // Buscar el tema por nombre y asignatura
-        $topic = Topic::where('topic', $request->topic)
-                      ->where('id_subject', $request->subject)
-                      ->first();
-    
-        // Si el tema no existe, crearlo
-        if (!$topic) {
-            $new_topic = new Topic;
-            $new_topic->topic = $request->topic;
-            $new_topic->id_subject = $request->subject;
-            $new_topic->save();
-            $topic = $new_topic;
-        }
-    
         // Crear la nota y relacionarla con el tema y el usuario actual
         $reminder = new Reminder;
         $reminder->title = $request->title;
@@ -77,10 +52,9 @@ class ReminderController extends Controller
         $reminder->creation_date = date('Y-m-d');
         $reminder->event_date = $request->event_date;
         $reminder->id_user = $user_id;
-        $reminder->id_topic = $topic->id;
         $reminder->save();
     
-        return redirect()->route('reminders.index')->with('success', 'Reminder deleted successfully!');
+        return redirect()->route('reminders.index')->with('success', 'Reminder saved successfully!');
 
     }
 
@@ -112,15 +86,13 @@ class ReminderController extends Controller
         }
 
         $user_id = auth()->id();
-        $subjects = Subject::where('id_career', auth()->user()->id_career)->pluck('subject', 'id');
-        return view('reminders.edit', compact('reminder','subjects'));
+        return view('reminders.edit', compact('reminder'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'title'=>['required'],
-            'content'=>['required'],
             'event_date'=>['required'],
             'topic'=>['required'],
         ]);
@@ -131,28 +103,12 @@ class ReminderController extends Controller
             return redirect()->back()->with('error', 'You do not have permission to edit this reminder.');
         }
 
-        $user_id = auth()->id();
-
-        // Buscar el tema por nombre y asignatura
-        $topic = Topic::where('topic', $request->topic)
-                      ->where('id_subject', $request->subject)
-                      ->first();
-    
-        // Si el tema no existe, crearlo
-        if (!$topic) {
-            $new_topic = new Topic;
-            $new_topic->topic = $request->topic;
-            $new_topic->id_subject = $request->subject;
-            $new_topic->save();
-            $topic = $new_topic;
-        }
-    
+        $user_id = auth()->id();       
         // Crear la nota y relacionarla con el tema y el usuario actual
         $reminder->title = $request->title;
         $reminder->content = $request->content;
         $reminder->value = $request->value;
         $reminder->event_date = $request->event_date;
-        $reminder->id_topic = $topic->id;
         $reminder->save();
         return redirect()->back()->with('success', 'reminder updated successfully!');
     }

@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 w-full bg-transparent">
+<div class="grid grid-cols-2 w-full {{$class ?? 'bg-transparent'}}">
     <div class="mr-auto text-left rounded-l-3xl">
         {{ $col1 }}
     </div>

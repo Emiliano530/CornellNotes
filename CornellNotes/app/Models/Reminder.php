@@ -15,13 +15,9 @@ class Reminder extends Model
         return $this->belongsTo(user::class,'id_user');
     }
 
-    public function topics() {
-        return $this->belongsTo(topic::class,'id_topic');
-    }
-
     public $timestamps = false;
 
-    protected $fillable = ['title', 'content', 'value', 'creation_date', 'event_date', 'id_user', 'id_topic'];
+    protected $fillable = ['title', 'content', 'value', 'creation_date', 'event_date', 'id_user'];
 
     protected function title(): Attribute
     {
@@ -62,11 +58,6 @@ class Reminder extends Model
 
             set: fn($value) => $value
         );
-    }
-
-    public function getEventDateAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->locale('es')->isoFormat('DD/MMM/YYYY') : null;
     }
 
 }
