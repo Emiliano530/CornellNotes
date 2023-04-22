@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('content');
-            $table->string('keyWords');
-            $table->string('summary');
-            $table->string('updates')->nullable();
+            $table->text('content');
+            $table->text('keyWords');
+            $table->text('summary');
+            $table->text('updates')->nullable();
             $table->date('creation_date');
 
             $table->foreignId('id_user')

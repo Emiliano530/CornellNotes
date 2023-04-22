@@ -21,7 +21,7 @@ class Note extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['title', 'content', 'keyWords', 'summary', 'creation_date', 'id_user', 'id_topic'];
+    protected $fillable = ['title', 'content', 'keyWords', 'summary', 'updates', 'creation_date', 'id_user', 'id_topic'];
 
     protected function title(): Attribute
     {
@@ -60,6 +60,6 @@ class Note extends Model
 
     public function getcreationDateAttribute($value)
     {
-        return $value ? Carbon::parse($value)->locale('es')->isoFormat('DD/MMM/YYYY') : null;
+        return $value ? Carbon::parse($value)->locale('es')->isoFormat('DD/MM/YYYY') : null;
     }
 }

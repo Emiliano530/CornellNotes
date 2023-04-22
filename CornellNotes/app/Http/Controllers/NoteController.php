@@ -92,6 +92,7 @@ class NoteController extends Controller
     {
         $note = Note::find($id);
         $subjects = Subject::where('id_career', auth()->user()->id_career)->pluck('subject', 'id');
+        $updates = unserialize($note->updates);
 
         if (!$note) {
             return view('errors.404')->with('error', 'The note does not exist.');
@@ -101,7 +102,7 @@ class NoteController extends Controller
             return redirect()->back()->with('error', 'You do not have permission to view this note.');
         }
 
-        return view('notes.show', compact('note','subjects'));
+        return view('notes.show', compact('note','subjects','updates'));
     }
 
     public function edit($id)
@@ -132,6 +133,7 @@ class NoteController extends Controller
         ]);
         
         $note = Note::find($id);
+        $updates = unserialize($note->updates);
 
         if ($note->id_user != auth()->id()) {
             return redirect()->back()->with('error', 'You do not have permission to edit this note.');
@@ -152,12 +154,15 @@ class NoteController extends Controller
             $new_topic->save();
             $topic = $new_topic;
         }
-    
+        // Establecer la zona horaria de Ciudad de México
+        date_default_timezone_set('America/Mexico_City');
         // Crear la nota y relacionarla con el tema y el usuario actual
         $note->title = $request->title;
         $note->content = $request->content;
         $note->keyWords = $request->keyWords;
         $note->summary = $request->summary;
+        $updates[] = date('Y-m-d h:i:s a');
+        $note->updates = serialize($updates);
         $note->id_topic = $topic->id;
         $note->save();
         return redirect()->route('notes.index')->with('success', 'Note updated successfully!');
@@ -172,7 +177,10 @@ class NoteController extends Controller
         }
 
         $note->delete();
-
-        return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
+        if(route('dashboard')){
+            return redirect()->back()->with('success', 'Note deleted successfully!');
+        }else{
+            return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
+        }
     }
 }

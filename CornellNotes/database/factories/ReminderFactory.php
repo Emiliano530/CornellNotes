@@ -20,7 +20,6 @@ class ReminderFactory extends Factory
     {
 
         $user = User::inRandomOrder()->first();
-        $topic = Topic::inRandomOrder()->first();
         return [
             'title' => fake()->word(),
             'content' => fake()->sentence(),
@@ -29,7 +28,6 @@ class ReminderFactory extends Factory
             'event_date' => fake()->date(),
 
             'id_user' => $user->id,
-            'id_topic' => $topic->id,
         ];
     }
 }

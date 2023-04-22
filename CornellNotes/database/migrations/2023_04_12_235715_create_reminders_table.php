@@ -16,16 +16,13 @@ return new class extends Migration
         Schema::create('reminders', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('content');
+            $table->text('content');
             $table->integer('value');
             $table->date('creation_date');
             $table->date('event_date');
 
             $table->foreignId('id_user')
                 ->constrained('users')
-                ->cascadeOnUpdate();
-            $table->foreignId('id_topic')
-                ->constrained('topics')
                 ->cascadeOnUpdate();
         });
     }

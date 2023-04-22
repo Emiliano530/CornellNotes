@@ -56,16 +56,21 @@
                     @enderror
                 </div>
         </x-container-secondary>
-    </x-container-principal>
         <div  class="m-4 text-center">
-            <label for="subject" class="text-white">Asignatura:</label>
+            <label for="subject" class="text-white text-lg">Asignatura:</label>
             <select id="subject" class="form-control block mt-1 w-1/4 h-2/4 ml-auto mr-auto text-center border-gray-300 dark:border-gray-700 dark:bg-gray-opacity dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-3xl shadow-sm" type="text" name="subject" :value="old('subject')" required autofocus autocomplete="subject">
                 @foreach($subjects as $subjectId => $subjectName)
                     <option value="{{ $subjectId }}">{{ $subjectName }}</option>
                 @endforeach
             </select>
             <input type="submit" value="Actualizar" class="btn btn-success hover:cursor-pointer m-2 inline-flex items-center px-4 py-2 bg-white dark:bg-black border border-gray-300 dark:border-gray-500 rounded-3xl font-semibold text-xs text-gray-700 dark:text-gray-300 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150">
+            <a href="{{ url('/notes/' . $note->id) }}">
+                <x-secondary-button>
+                    Cancelar
+                </x-secondary-button>
+            </a>
         </div>
+    </x-container-principal>
     </form>
 </x-app-layout>
 
@@ -75,6 +80,10 @@
     autoresizeTextareas.forEach(function(textarea) {
         const minHeight = textarea.clientHeight;
         textarea.style.height = minHeight + 'px';
+
+        setTimeout(() => {
+            textarea.dispatchEvent(new Event('input'));
+        }, 10);
 
         textarea.addEventListener('input', function() {
             if (this.scrollHeight > minHeight) {
@@ -103,3 +112,4 @@
         });
     });
 </script>
+

@@ -26,7 +26,7 @@ class NoteFactory extends Factory
             'keyWords' => implode(',', fake()->words()),
             'summary' => fake()->paragraph(),
             'creation_date' => fake()->date(),
-
+            
             'id_user' => $user->id,
             'id_topic' => $topic->id,
         ];
