@@ -86,12 +86,6 @@
                 @if((count($reminders) >0))
                     @foreach($reminders as $key => $reminder)
                     @php
-                        $colors = [
-                            'Muy importante' => 'bg-red-600',
-                            'Importante' => 'bg-orange-600',
-                            'Regular' => 'bg-yellow-600',
-                            'No importante' => 'bg-green-600',
-                        ];
                         $color = $colors[$reminder->value] ?? 'bg-green-500';
                     @endphp
                         <x-card-data class="

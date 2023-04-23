@@ -15,6 +15,7 @@ module.exports = {
             },
             colors: {
                 'gray-opacity': '#0D2536',
+                'second-container': '#132033',
               },
         },
     },

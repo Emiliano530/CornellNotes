@@ -8,6 +8,7 @@ use App\Models\Reminder;
 use App\Models\Subject;
 use App\Models\Topic;
 use App\Policies\ReminderPolicy;
+use Carbon\Carbon;
 
 class ReminderController extends Controller
 {
@@ -61,6 +62,15 @@ class ReminderController extends Controller
     public function show($id)
     {
         $reminder = Reminder::find($id);
+        $colors = [
+            'Muy importante' => 'bg-red-600',
+            'Importante' => 'bg-orange-600',
+            'Regular' => 'bg-yellow-600',
+            'No importante' => 'bg-green-600',
+        ];
+        $dateTime = Carbon::parse($reminder->event_date);
+        $date = $dateTime->toDateString();
+        $time = $dateTime->toTimeString();
 
         if (!$reminder) {
             return view('errors.404')->with('error', 'The reminder does not exist.');
@@ -70,12 +80,22 @@ class ReminderController extends Controller
             return redirect()->back()->with('error', 'You do not have permission to view this reminder.');
         }
 
-        return view('reminders.show', compact('reminder'));
+        return view('reminders.show', compact('reminder', 'colors','date','time'));
     }
 
     public function edit($id)
     {
         $reminder = Reminder::find($id);
+        $colors = [
+            'Muy importante' => 'bg-red-600',
+            'Importante' => 'bg-orange-600',
+            'Regular' => 'bg-yellow-600',
+            'No importante' => 'bg-green-600',
+        ];
+
+        $dateTime = Carbon::parse($reminder->event_date);
+        $date = $dateTime->toDateString();
+        $time = $dateTime->toTimeString();
 
         if (!$reminder) {
             return view('errors.404')->with('error', 'The reminder does not exist.');
@@ -86,32 +106,33 @@ class ReminderController extends Controller
         }
 
         $user_id = auth()->id();
-        return view('reminders.edit', compact('reminder'));
+        return view('reminders.edit', compact('reminder','colors','date','time'));
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'title'=>['required'],
-            'event_date'=>['required'],
-            'topic'=>['required'],
-        ]);
-        
-        $reminder = Reminder::find($id);
+{
+    $reminder = Reminder::find($id);
 
-        if ($reminder->id_user != auth()->id()) {
-            return redirect()->back()->with('error', 'You do not have permission to edit this reminder.');
-        }
+    $date = $request->date;
+    $time = $request->time;
+    
+    $datetime = Carbon::createFromFormat('Y-m-d H:i', "$date $time", 'America/Mexico_City');
 
-        $user_id = auth()->id();       
-        // Crear la nota y relacionarla con el tema y el usuario actual
-        $reminder->title = $request->title;
-        $reminder->content = $request->content;
-        $reminder->value = $request->value;
-        $reminder->event_date = $request->event_date;
-        $reminder->save();
-        return redirect()->back()->with('success', 'reminder updated successfully!');
+    if ($reminder->id_user != auth()->id()) {
+        return redirect()->back()->with('error', 'You do not have permission to edit this reminder.');
     }
+
+    $user_id = auth()->id();       
+    // 
+    $reminder->title = $request->title;
+    $reminder->content = $request->content;
+    $reminder->value = $request->value;
+    $reminder->event_date = $datetime;
+    $reminder->save();
+    
+    return redirect()->route('reminders.index')->with('success', 'Reminder updated successfully!');
+}
+
 
     public function destroy($id)
     {

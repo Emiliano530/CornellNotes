@@ -27,6 +27,13 @@ class DashboardController extends Controller
             'diciembre',
         ];
 
+        $colors = [
+            'Muy importante' => 'bg-red-600',
+            'Importante' => 'bg-orange-600',
+            'Regular' => 'bg-yellow-600',
+            'No importante' => 'bg-green-600',
+        ];
+
         $id_user = Auth::user()->id; // Obtenemos el id del usuario autenticado
         $notes = Note::where('id_user', $id_user)->latest('id')->take(5)->get();
         $reminders = Reminder::where('id_user', $id_user)
@@ -35,6 +42,6 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        return view('dashboard',compact('notes', 'reminders','meses'));
+        return view('dashboard',compact('notes', 'reminders','meses','colors'));
     }
 }

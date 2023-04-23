@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Crear nota') }}
+            {{ __('Ver nota') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
                 @endforeach
             </select>
         @endif
-        <x-container-secondary class="bg-white bg-opacity-100">
+        <x-container-secondary>
             <div class="grid grid-cols-12 bg-zinc-50 rounded-3xl">
                 <div class="col-span-8 border-transparent border-b-black border-r-black border-2 w-auto p-2 ">
                     <p class="break-words text-xl">{{ $note->title }}</p>
