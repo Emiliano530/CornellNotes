@@ -7,14 +7,14 @@
     <form action="{{ url('notes') }}" method="post">
         {!! csrf_field() !!}
     <x-container-principal>
-        <x-container-secondary class="bg-white bg-opacity-100">
+        <x-container-secondary>
             <div class="grid grid-cols-12 bg-zinc-50 rounded-3xl">
                 <div class="col-span-8 border-transparent border-b-black border-r-black border-2 w-auto p-2 ">
                     <textarea type="text" name="title" id="title"
                     class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black align-middle" placeholder="Titulo">{{ old('title') }}</textarea>
                     @error('title')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-600">{{ $message }}</small>
                     @enderror
                   </div>
                   <div class="col-span-4 border-transparent border-b-black border-2 w-auto p-2">
@@ -22,7 +22,7 @@
                     class="form-control autoresize w-full min-h-10 h-10 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Tema">{{ old('topic') }}</textarea>
                     @error('topic')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small><br>
+                        <small class="text-red-600">{{ $message }}</small><br>
                     @enderror
                     @auth
                         <label>{{auth()->user()->name}} {{auth()->user()->lastName}}</label></br>
@@ -34,15 +34,15 @@
                     class="form-control autoresize w-full min-h-10 h-96 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Palabras clave">{{ old('keyWords') }}</textarea>
                     @error('keyWords')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
                   <div class="col-span-9 border-transparent border-b-black border-2 w-auto p-2">
                     <textarea type="text" name="content" id="content"
-                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Notas">{{ old('content') }}</textarea>
+                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Contenido">{{ old('content') }}</textarea>
                     @error('content')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
                     
@@ -51,7 +51,7 @@
                     class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Resumen">{{ old('summary') }}</textarea>
                     @error('summary')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
         </x-container-secondary>

@@ -41,16 +41,12 @@
             <input type="text" name="subject" id="subject"  value="{{ $note->topics->subjects->subject }}"
                     class="form-control bg-white rounded-3xl text-center mb-4" disabled><br>
                     
-            <div class="inline-flex items-center">
+            <div class="inline-flex items-center mb-2">
                 <a href="{{ url('/notes/' . $note->id . '/edit') }}">
                     <x-secondary-button>
                         Editar
                     </x-secondary-button>
                 </a>
-                <x-delete-button-icon>
-                    <x-slot name="url">{{ url('/notes' . '/' . $note->id) }}</x-slot>
-                    <button class="hover:cursor-pointer px-4 py-2 m-2 bg-white dark:bg-red-700 border border-gray-300 dark:border-gray-500 rounded-3xl font-semibold text-xs text-gray-700 dark:text-white uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150" onclick="return confirm(&quot;¿Estás seguro? Se eliminará definitivamente&quot;)">Eliminar</button>
-                </x-delete-button-icon>
             </div>
         </div>
     </x-container-principal>

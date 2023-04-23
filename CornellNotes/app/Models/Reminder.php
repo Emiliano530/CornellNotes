@@ -59,5 +59,5 @@ class Reminder extends Model
             set: fn($value) => $value
         );
     }
-
+    
 }

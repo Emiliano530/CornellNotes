@@ -36,6 +36,9 @@
             <x-container-content>
                 @if((count($reminders) >0))
                     @foreach($reminders as $key => $reminder)
+                    @php
+                        $color = $colors[$reminder->value] ?? 'bg-green-500';
+                    @endphp
                         <x-card-data class="
                         {{ $key === 0 && count($reminders) === 1 ? 'rounded-3xl' : '' }}
                         {{ $key % 5 === 0 ? 'rounded-l-3xl border-none' : '' }}
@@ -43,25 +46,23 @@
                         {{ $key % 5 === 0 ? 'rounded-tl-3xl rounded-bl-3xl' : '' }}
                         {{ ($key + 1) % 5 === 0 ? 'rounded-tr-3xl rounded-br-3xl' : '' }}
                         {{ $key === (count($reminders) - 1) && count($reminders) > 1 ? 'rounded-r-3xl' : '' }}
-                        bg-cyan-700">
+                        {{$color}}">
                             <x-header-card-data>
                                 <x-slot name="col1">
-                                    <h1 class="text-lg text-white uppercase group-hover:text-lime-500">#{{$loop->iteration}}</h1>
+                                    <h1 class="text-lg text-white uppercase group-hover:text-lime-200">#{{$loop->iteration}}</h1>
                                 </x-slot>
                                 <x-slot name="col2">
                                     <x-delete-button-icon>
                                         <x-slot name="url">{{ url('/reminders' . '/' . $reminder->id) }}</x-slot>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 stroke-white group-hover:stroke-lime-500 group-hover:hover:stroke-red-500 stroke-2" className="w-6 h-6 ">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
+                                        <x-delete-icon class="group-hover:stroke-lime-200"/>
                                     </x-delete-button-icon>
                                 </x-slot>
                             </x-header-card-data>
-                            <x-content-card-data class="group-hover:text-lime-400">
-                                <x-slot name="title">{{ $reminder->title }}</x-slot>
-                                <x-slot name="content">{{ $reminder->content }}</x-slot>
+                            <x-content-card-data class="group-hover:text-lime-200">
+                                <x-slot name="title">{{ \Carbon\Carbon::parse($reminder->event_date)->format('d') }}</x-slot>
+                                <x-slot name="content">{{ $meses[\Carbon\Carbon::parse($reminder->event_date)->month - 1] }}</x-slot>
                             </x-content-card-data>
-                            <x-link-arrow-animation class="group-hover:text-lime-500">
+                            <x-link-arrow-animation class="group-hover:text-lime-200">
                                 <x-slot name="url">{{ url('/reminders/' . $reminder->id) }}</x-slot>
                                 Ver Recordatorio
                             </x-link-arrow-animation>

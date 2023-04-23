@@ -15,7 +15,7 @@
                     class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black align-middle" placeholder="Titulo">{{$note->title}}</textarea>
                     @error('title')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-600">{{ $message }}</small>
                     @enderror
                   </div>
                   <div class="col-span-4 border-transparent border-b-black border-2 w-auto p-2">
@@ -23,7 +23,7 @@
                     class="form-control autoresize w-full min-h-10 h-10 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Tema">{{$note->topics->topic}}</textarea>
                     @error('topic')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small><br>
+                        <small class="text-red-600">{{ $message }}</small><br>
                     @enderror
                     @auth
                         <label>{{auth()->user()->name}} {{auth()->user()->lastName}}</label></br>
@@ -35,15 +35,15 @@
                     class="form-control autoresize w-full min-h-10 h-96 resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Palabras clave">{{$note->keyWords}}</textarea>
                     @error('keyWords')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
                   <div class="col-span-9 border-transparent border-b-black border-2 w-auto p-2">
                     <textarea type="text" name="content" id="content"  value="{{ old('content') }}"
-                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Notas">{{$note->content}}</textarea>
+                    class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Contenido">{{$note->content}}</textarea>
                     @error('content')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
                     
@@ -52,7 +52,7 @@
                     class="form-control autoresize w-full min-h-10 h-full resize-none border text-xl text-center border-none rounded-3xl px-2 r-2 py-1 bg-transparent placeholder-black" placeholder="Resumen">{{$note->summary}}</textarea>
                     @error('summary')
                         <br>
-                        <small class="text-red-900">{{ $message }}</small>
+                        <small class="text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
         </x-container-secondary>

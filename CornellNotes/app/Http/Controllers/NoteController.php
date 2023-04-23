@@ -50,9 +50,9 @@ class NoteController extends Controller
 
         $request->validate([
             'title'=>['required'],
-            'content'=>['required'],
+            'content'=>['required','min:50'],
             'keyWords'=>['required'],
-            'summary'=>['required'],
+            'summary'=>['required','min:50'],
             'topic'=>['required'],
         ]);
         
@@ -126,9 +126,9 @@ class NoteController extends Controller
     {
         $request->validate([
             'title'=>['required'],
-            'content'=>['required'],
+            'content'=>['required','min:50'],
             'keyWords'=>['required'],
-            'summary'=>['required'],
+            'summary'=>['required','min:50'],
             'topic'=>['required'],
         ]);
         
@@ -161,7 +161,7 @@ class NoteController extends Controller
         $note->content = $request->content;
         $note->keyWords = $request->keyWords;
         $note->summary = $request->summary;
-        $updates[] = date('Y-m-d h:i:s a');
+        $updates[] = date('d/m/Y h:i a');
         $note->updates = serialize($updates);
         $note->id_topic = $topic->id;
         $note->save();
@@ -176,10 +176,11 @@ class NoteController extends Controller
             return redirect()->back()->with('error', 'You do not have permission to delete this note.');
         }
 
-        $note->delete();
         if(route('dashboard')){
+            $note->delete();
             return redirect()->back()->with('success', 'Note deleted successfully!');
         }else{
+            $note->delete();
             return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
         }
     }
