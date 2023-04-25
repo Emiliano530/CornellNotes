@@ -9,6 +9,9 @@
         @method("PATCH")
     <x-container-principal>
         <x-container-secondary>
+            @php
+                $color = $colors[$reminder->value] ?? 'bg-gray-300';
+            @endphp
             <div class="grid grid-cols-12 bg-gray-900 rounded-3xl text-white">
                 <div class="col-span-8 border-transparent border-b-black border-r-black border-2 w-auto p-2 ">
                     <textarea type="text" name="title" id="title"  value="{{ old('title') }}" rows="1" maxlength="220"
@@ -17,12 +20,12 @@
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
-                  <div id="Importancia" class="col-span-4 bg-red-600 border-transparent rounded-tr-3xl border-b-black border-2 w-auto p-1">
-                    <select id="value"class="flex items-center text-center justify-center bg-red-600 text-xl m-0 w-full h-full border-gray-300 dark:border-none dark:text-white focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-3xl shadow-sm" type="number" name="value" :value="old('value')" autocomplete="value">
-                        <option value="1" data-color="bg-red-600">Muy importante</option>
-                        <option value="2" data-color="bg-orange-600">Importante</option>
-                        <option value="3" data-color="bg-yellow-600">Regular</option>
-                        <option value="4" data-color="bg-green-600">No importante</option>
+                  <div id="Importancia" class="col-span-4 {{$color}} border-transparent rounded-tr-3xl border-b-black border-2 w-auto p-1">
+                    <select id="value"class="flex items-center text-center justify-center {{$color}} text-xl m-0 w-full h-full border-gray-300 dark:border-none dark:text-white focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-3xl shadow-sm" type="number" name="value" :value="old('value')" autocomplete="value">
+                        <option value="1" data-color="bg-red-600" <?php if ($reminder->value == 'Muy importante') { echo ' selected'; } ?>>Muy importante</option>
+                        <option value="2" data-color="bg-orange-600" <?php if ($reminder->value == 'Importante') { echo ' selected'; } ?>>Importante</option>
+                        <option value="3" data-color="bg-yellow-600" <?php if ($reminder->value == 'Regular') { echo ' selected'; } ?>>Regular</option>
+                        <option value="4" data-color="bg-green-600" <?php if ($reminder->value == 'No importante') { echo ' selected'; } ?>>No importante</option>
                     </select>
                   </div>
                   <div class="col-span-12 border-transparent bg-gray-600 border-b-black border-2 w-auto p-2">

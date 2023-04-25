@@ -83,7 +83,7 @@ class NoteController extends Controller
         $note->id_topic = $topic->id;
         $note->save();
     
-        return redirect()->route('notes.index')->with('success', 'Note created successfully!');
+        return redirect()->route('notes.index')->with('success', 'Nota creada satisfactoriamente.');
 
     }
 
@@ -95,11 +95,11 @@ class NoteController extends Controller
         $updates = unserialize($note->updates);
 
         if (!$note) {
-            return view('errors.404')->with('error', 'The note does not exist.');
+            return view('errors.404')->with('error', 'La nota no existe.');
         }
 
         if (Gate::denies('view', $note)) {
-            return redirect()->back()->with('error', 'You do not have permission to view this note.');
+            return redirect()->back()->with('error', 'No tienes permiso para ver esta nota.');
         }
 
         return view('notes.show', compact('note','subjects','updates'));
@@ -110,11 +110,11 @@ class NoteController extends Controller
         $note = Note::find($id);
 
         if (!$note) {
-            return view('errors.404')->with('error', 'The note does not exist.');
+            return view('errors.404')->with('error', 'La nota no existe.');
         }
 
         if ($note->id_user != auth()->id()) {
-            return redirect()->back()->with('error', 'You do not have permission to edit this note.');
+            return redirect()->back()->with('error', 'No tienes permiso para editar esta nota.');
         }
 
         $user_id = auth()->id();
@@ -136,7 +136,7 @@ class NoteController extends Controller
         $updates = unserialize($note->updates);
 
         if ($note->id_user != auth()->id()) {
-            return redirect()->back()->with('error', 'You do not have permission to edit this note.');
+            return redirect()->back()->with('error', 'No tienes permiso para editar esta nota.');
         }
 
         $user_id = auth()->id();
@@ -165,7 +165,7 @@ class NoteController extends Controller
         $note->updates = serialize($updates);
         $note->id_topic = $topic->id;
         $note->save();
-        return redirect()->route('notes.index')->with('success', 'Note updated successfully!');
+        return redirect()->route('notes.index')->with('success', 'Nota actualizada satisfactoriamente.');
     }
 
     public function destroy($id)
@@ -173,15 +173,15 @@ class NoteController extends Controller
         $note = Note::find($id);
 
         if ($note->id_user != auth()->id()) {
-            return redirect()->back()->with('error', 'You do not have permission to delete this note.');
+            return redirect()->back()->with('error', 'No tienes permiso para eliminar esta nota.');
         }
 
         if(route('dashboard')){
             $note->delete();
-            return redirect()->back()->with('success', 'Note deleted successfully!');
+            return redirect()->back()->with('success', 'Nota eliminada satisfactoriamente.');
         }else{
             $note->delete();
-            return redirect()->route('notes.index')->with('success', 'Note deleted successfully!');
+            return redirect()->route('notes.index')->with('success', 'Nota eliminada satisfactoriamente.');
         }
     }
 }

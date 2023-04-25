@@ -91,7 +91,7 @@ class ReminderController extends Controller
         $reminder->id_user = $user_id;
         $reminder->save();
     
-        return redirect()->route('reminders.index')->with('success', 'Reminder saved successfully!');
+        return redirect()->route('reminders.index')->with('success', 'Recordatorio creado satisfactoriamente');
 
     }
 
@@ -109,11 +109,11 @@ class ReminderController extends Controller
         $time = $dateTime->format("h:i a");
 
         if (!$reminder) {
-            return view('errors.404')->with('error', 'The reminder does not exist.');
+            return view('errors.404')->with('error', 'El recordatorio no existe.');
         }
 
         if (Gate::denies('view', $reminder)) {
-            return redirect()->back()->with('error', 'You do not have permission to view this reminder.');
+            return redirect()->back()->with('error', 'No tienes permiso para ver este recordatorio.');
         }
 
         return view('reminders.show', compact('reminder', 'colors','date','time'));
@@ -127,16 +127,23 @@ class ReminderController extends Controller
         $date = $dateTime->toDateString();
         $time = $dateTime->format('H:i');
 
+        $colors = [
+            'Muy importante' => 'bg-red-600',
+            'Importante' => 'bg-orange-600',
+            'Regular' => 'bg-yellow-600',
+            'No importante' => 'bg-green-600',
+        ];
+
         if (!$reminder) {
-            return view('errors.404')->with('error', 'The reminder does not exist.');
+            return view('errors.404')->with('error', 'El recordatorio no existe.');
         }
 
         if ($reminder->id_user != auth()->id()) {
-            return redirect()->back()->with('error', 'You do not have permission to edit this reminder.');
+            return redirect()->back()->with('error', 'No tienes permiso para editar este recordatorio.');
         }
 
         $user_id = auth()->id();
-        return view('reminders.edit', compact('reminder','date','time'));
+        return view('reminders.edit', compact('reminder','date','time','colors'));
     }
 
     public function update(Request $request, $id)
@@ -154,7 +161,7 @@ class ReminderController extends Controller
     $datetime = Carbon::createFromFormat('Y-m-d H:i', "$date $time", 'America/Mexico_City');
 
     if ($reminder->id_user != auth()->id()) {
-        return redirect()->back()->with('error', 'You do not have permission to edit this reminder.');
+        return redirect()->back()->with('error', 'No tienes permiso para editar este recordatorio.');
     }
 
     $user_id = auth()->id();       
@@ -165,7 +172,7 @@ class ReminderController extends Controller
     $reminder->event_date = $datetime;
     $reminder->save();
     
-    return redirect()->route('reminders.index')->with('success', 'Reminder updated successfully!');
+    return redirect()->route('reminders.index')->with('success', 'Recordatorio actualizado satisfactoriamente.');
 }
 
 
@@ -174,15 +181,15 @@ class ReminderController extends Controller
         $reminder = Reminder::find($id);
 
         if ($reminder->id_user != auth()->id()) {
-            return redirect()->back()->with('error', 'You do not have permission to delete this reminder.');
+            return redirect()->back()->with('error', 'No tienes permiso para eliminar este recordatorio.');
         }
 
         $reminder->delete();
 
         if(route('dashboard')){
-            return redirect()->back()->with('success', 'Reminder deleted successfully!');
+            return redirect()->back()->with('success', 'Recordatorio eliminado satisfactoriamente.');
         }else{
-            return redirect()->route('reminders.index')->with('success', 'Reminder deleted successfully!');
+            return redirect()->route('reminders.index')->with('success', 'Recordatorio eliminado satisfactoriamente.');
         }
     }
 }

@@ -5,6 +5,8 @@
         </h2>
     </x-slot>
     
+    <x-success-alert/>
+    <x-error-alert/>
     <!-- Aqui empieza lo diferente del dashboard -->
     <x-container-principal>
 

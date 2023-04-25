@@ -4,8 +4,16 @@
             {{ __('Notas') }}
         </h2>
     </x-slot>
-
+    <x-success-alert/>
+    <x-error-alert/>
     <x-container-principal>
+        <a href="{{ url('/reminders/create') }}">
+            <div class="text-left">
+                <x-primary-button class="dark:hover:bg-green-700 dark:bg-green-900 dark:focus:bg-green-900 dark:active:bg-green-900">
+                    Nuevo
+                </x-primary-button>
+            </div>
+        </a>
         <x-container-secondary>
             <x-container-header class="pb-4">
                 <x-slot name="col1">
@@ -81,9 +89,7 @@
     <x-floating-button>
             <x-slot name="url">/reminders/create</x-slot>
             <x-slot name="icon">
-                <svg  fill="none" viewBox="0 0 24 24" stroke="white">
-                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z" clip-rule="evenodd" />
-                </svg>
+                <x-plus-icon/>
             </x-slot>
             Nuevo
     </x-floating-button>

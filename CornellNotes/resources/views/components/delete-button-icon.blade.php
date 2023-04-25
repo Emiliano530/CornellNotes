@@ -1,7 +1,30 @@
-<form method="POST" action="{{ $url ?? ''}}" accept-charset="UTF-8">
+<form method="POST" action="{{ $url ?? ''}}" accept-charset="UTF-8" class="form-delete">
         {{ method_field('DELETE') }}
         {{ csrf_field() }}
-    <button type="submit" title="Eliminar" onclick="return confirm(&quot;¿Estás seguro? Se eliminará definitivamente&quot;)">
+    <button type="submit" title="Eliminar">
         {{ $slot }}
     </button>
 </form>
+
+<script>
+    $('.form-delete').submit(function(e){
+        e.preventDefault()
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            this.submit()
+        }
+        })
+
+    });
+
+    
+</script>

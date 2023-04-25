@@ -7,7 +7,7 @@
     <x-container-principal>
         <x-container-secondary>
             @php
-                $color = $colors[$reminder->value] ?? 'bg-green-500';
+                $color = $colors[$reminder->value] ?? 'bg-gray-300';
             @endphp
             <div class="grid grid-cols-12 bg-gray-900 rounded-3xl text-white">
                 <div class="col-span-8 border-transparent border-b-black border-r-black border-2 w-auto p-2 ">

@@ -4,8 +4,16 @@
             {{ __('Notas') }}
         </h2>
     </x-slot>
-
+    <x-success-alert/>
+    <x-error-alert/>
     <x-container-principal>
+        <a href="{{ url('/notes/create') }}">
+            <div class="text-left">
+                <x-primary-button class="dark:hover:bg-green-700 dark:bg-green-900 dark:focus:bg-green-900 dark:active:bg-green-900">
+                    Nuevo
+                </x-primary-button>
+            </div>
+        </a>
         <x-container-secondary>
             <x-container-header class="pb-4">
                 <x-slot name="col1">
