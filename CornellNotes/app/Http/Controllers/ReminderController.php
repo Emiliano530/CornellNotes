@@ -70,7 +70,6 @@ class ReminderController extends Controller
     {
         $request->validate([
             'title'=>['required'],
-            'content'=>['required','min:50'],
             'date'=>['required'],
             'time'=>['required'],
         ]);
@@ -150,7 +149,8 @@ class ReminderController extends Controller
 {
     $request->validate([
         'title'=>['required'],
-        'content'=>['required','min:50'],
+        'date'=>['required'],
+        'time'=>['required'],
     ]);
 
     $reminder = Reminder::find($id);
